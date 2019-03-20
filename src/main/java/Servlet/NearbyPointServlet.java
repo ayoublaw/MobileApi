@@ -5,6 +5,8 @@ import Service.JsonService;
 import Service.MangaService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
@@ -25,8 +27,13 @@ public class NearbyPointServlet extends HttpServlet {
         double lng = jsonobj.getDouble("lng");
 
         List<Manga> mangas = m.SelectMangaNearbyPoint(name,lat,lng);
+
+        JSONObject jsonO = new JSONObject();
+        jsonO.put("resultas",mangas);
+
         Gson gson = new GsonBuilder().create();
-        String json = gson.toJson(mangas);
+        String json = gson.toJson(jsonO);
+
         response.setContentType("application/json");
         response.setStatus(200);
         response.setCharacterEncoding("UTF-8");
