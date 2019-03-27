@@ -1,6 +1,5 @@
 package Model.Entity;
 
-import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,9 +27,19 @@ public class Manga implements Serializable {
     @Column
     private String telephone;
 
+    @Column
+    private Double volume;
+
     @OneToOne
     private MapsAddress address;
 
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
+    }
 
     public Integer getId() {
         return Id;

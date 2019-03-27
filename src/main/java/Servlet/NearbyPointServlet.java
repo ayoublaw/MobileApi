@@ -25,8 +25,12 @@ public class NearbyPointServlet extends HttpServlet {
         String name = jsonobj.getString("name");
         double lat = jsonobj.getDouble("lat");
         double lng = jsonobj.getDouble("lng");
-
-        List<Manga> mangas = m.SelectMangaNearbyPoint(name,lat,lng);
+        Double volume = jsonobj.isNull("volume") ? null : jsonobj.getDouble("volume");
+        List<Manga> mangas;
+        if(volume == null)
+            mangas = m.SelectMangaNearbyPointWithoutVolume(name, lat, lng);
+        else
+            mangas = m.SelectMangaNearbyPointWithVolume(name, volume, lat, lng);
 
         JSONObject jsonO = new JSONObject();
         jsonO.put("resultas",mangas);

@@ -25,6 +25,7 @@ public class AddServlet extends javax.servlet.http.HttpServlet {
         String sellerName = jsonobj.getString("sellerName");
         String telephone = jsonobj.getString("telephone");
         String adresse = jsonobj.getString("adresse");
+        Double volume = jsonobj.getDouble("volume");
 
         JSONObject jsonLatAndLng = mapApi.GetPlaceLatLng(adresse);
         System.out.println("AFFFichage : "+ jsonLatAndLng);
@@ -33,7 +34,7 @@ public class AddServlet extends javax.servlet.http.HttpServlet {
         double lat = (double) location.get("lat");
         double lng = (double) location.get("lng");
 
-        mangaService.AddManga(name,price,sellerName,telephone,adresse,lat,lng);
+        mangaService.AddManga(name,volume,price,sellerName,telephone,adresse,lat,lng);
 
         JsonObject jsonO = new JsonObject();
         jsonO.addProperty("message","Operation Bien effectué");
