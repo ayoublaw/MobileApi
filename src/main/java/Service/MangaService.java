@@ -33,4 +33,7 @@ public class MangaService {
     public List<Manga> SelectMangaNearbyPointWithVolume(String name,double volume, double lat, double lng){
         return DaoFactory.getMangaDao().getMangaNearbyPointWithVolume(name, volume, lat, lng);
     }
+    public List<Manga> SelectAllManga(){
+        return DaoFactory.getMangaDao().selectAll();
+    }
 }
