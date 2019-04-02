@@ -26,15 +26,15 @@ public class AddServlet extends javax.servlet.http.HttpServlet {
         String telephone = jsonobj.getString("telephone");
         String adresse = jsonobj.getString("adresse");
         Double volume = jsonobj.getDouble("volume");
+        String imageUrl = jsonobj.getString("imageUrl");
 
         JSONObject jsonLatAndLng = mapApi.GetPlaceLatLng(adresse);
-        System.out.println("AFFFichage : "+ jsonLatAndLng);
         JSONObject location = jsonLatAndLng.getJSONArray("candidates").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
 
         double lat = (double) location.get("lat");
         double lng = (double) location.get("lng");
 
-        mangaService.AddManga(name,volume,price,sellerName,telephone,adresse,lat,lng);
+        mangaService.AddManga(name,volume,price,sellerName,telephone,adresse,lat,lng,imageUrl);
 
         JsonObject jsonO = new JsonObject();
         jsonO.addProperty("message","Operation Bien effectué");

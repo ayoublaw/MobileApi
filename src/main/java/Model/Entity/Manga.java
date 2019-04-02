@@ -30,6 +30,17 @@ public class Manga implements Serializable {
     @Column
     private Double volume;
 
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
+    @Column
+    private String ImageUrl;
+
     @OneToOne
     private MapsAddress address;
 
