@@ -1,6 +1,7 @@
 package Service;
 
 import Model.Dao.DaoFactory;
+import Model.Dao.MangaDao;
 import Model.Entity.Manga;
 import Model.Entity.MapsAddress;
 
@@ -36,5 +37,9 @@ public class MangaService {
     }
     public List<Manga> SelectAllManga(){
         return DaoFactory.getMangaDao().selectAll();
+    }
+    public void DeleteManga(String mangaName,String sellerName,Double volume,double price, String adresse){
+        Manga m = DaoFactory.getMangaDao().getManga(mangaName,sellerName,volume,price,adresse);
+        DaoFactory.getMangaDao().remove(m);
     }
 }

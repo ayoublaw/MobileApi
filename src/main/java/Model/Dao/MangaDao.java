@@ -23,8 +23,9 @@ public class MangaDao extends Dao<Manga>{
             q.setParameter("x",lat);q.setParameter("y",lng);q.setParameter("z",name);
             List<Manga> list = q.list();
             s.close();
-            return list;}
-    public List<Manga> getMangaNearbyPointWithVolume(String name,Double volume,double lat, double lng){
+            return list;
+   }
+   public List<Manga> getMangaNearbyPointWithVolume(String name,Double volume,double lat, double lng){
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session s = factory.openSession();
         Query q = s.createQuery(
@@ -38,6 +39,24 @@ public class MangaDao extends Dao<Manga>{
         q.setParameter("x",lat);q.setParameter("a",volume);q.setParameter("y",lng);q.setParameter("z",name);
         List<Manga> list = q.list();
         s.close();
-        return list;}
+        return list;
+   }
+   public Manga getManga(String mangaName,String sellerName,Double volume,double price, String adresse){
+       SessionFactory factory = HibernateUtil.getSessionFactory();
+       Session s = factory.openSession();
+       Query q = s.createQuery(
+               "select manga from "
+                       +Manga.class.getSimpleName()+" as manga JOIN manga.address mp " +
+                       "where manga.mangaName = :a "+
+                       "and manga.volume = :b "+
+                       "and manga.sellerName = :x "+
+                       "and manga.price = :y "+
+                       "and mp.Address = :z "
+       );
+       q.setParameter("a",mangaName);q.setParameter("b",volume);q.setParameter("x",sellerName);q.setParameter("y",price);q.setParameter("z",adresse);
+       List<Manga> list = q.list();
+       s.close();
+       return list.get(0);
+   }
 
 }
