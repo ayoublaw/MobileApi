@@ -34,8 +34,8 @@ public class MangaDao extends Dao<Manga>{
                         "where m.mangaName = :z "+
                         "and m.volume = :a "+
                         "and SQRT(\n" +
-                        "    POW(69.1 * (:x - mp.lat), 2) +\n" +
-                        "    POW(69.1 * (mp.lng - :y) * COS(:x / 57.3), 2)) < 25");
+                        "    POW(200 * (:x - mp.lat), 2) +\n" +
+                        "    POW(200 * (mp.lng - :y) * COS(:x / 57.3), 2)) < 25");
         q.setParameter("x",lat);q.setParameter("a",volume);q.setParameter("y",lng);q.setParameter("z",name);
         List<Manga> list = q.list();
         s.close();
